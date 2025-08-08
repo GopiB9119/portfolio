@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0b0c10;
+  --foreground: #e6e6e6;
+  --muted: #a0a3ab;
+  --card: #0f1116;
+  --panel: #111317;
+  --border: #1c1f27;
+  --primary: #7c5cff;
+  --accent: #2de2e6;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Light theme (applied when .light is on html via next-themes) */
+:root.light {
+  --background: #f7f7fb;
+  --foreground: #1a1b1e;
+  --muted: #4a4f5c;
+  --card: #ffffff;
+  --panel: #ffffff;
+  --border: #e8eaf1;
+  --primary: #5b67ff;
+  --accent: #00b5c9;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Utility classes for portfolio layout */
+.container { width: min(1100px, 92%); margin: 0 auto; }
+.btn { @apply inline-flex items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--panel)] text-[var(--foreground)] px-3 py-2 shadow; }
+.btn-primary { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border-color: transparent; }
+.btn-outline { background: transparent; }
+.tag { @apply text-xs px-2 py-1 rounded-full border border-[var(--border)] text-[var(--muted)]; }
+.card { @apply bg-[var(--card)] border border-[var(--border)] rounded-2xl p-4 shadow; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.hero-name { font-size: clamp(36px, 5vw, 56px); line-height: 1.1; font-weight: 800; }
+.muted { color: var(--muted); }
+.prose p { margin: 0.5rem 0; }
+
+/* Smooth scrolling and anchor offset for sticky header */
+html { scroll-behavior: smooth; }
+:target::before { content: ""; display: block; height: 64px; margin-top: -64px; visibility: hidden; }
+.prose p { margin: 0.5rem 0; }
