@@ -46,6 +46,13 @@ jobs:
           if (Test-Path public) { Copy-Item -Recurse -Force public dist/public }
           # IIS web.config to route to server.js
           if (Test-Path web.config) { Copy-Item web.config dist/web.config }
+            # Diagnostics and fail-fast if server.js is missing
+            Write-Host "Listing .next/standalone contents:"; Get-ChildItem -Recurse -File ".next/standalone" | Select-Object -ExpandProperty FullName
+            Write-Host "Listing dist root:"; Get-ChildItem dist | Select-Object Name,Length
+            if (!(Test-Path "dist/server.js") -and !(Test-Path "dist/server.cjs")) {
+              Write-Host "ERROR: server.js (or server.cjs) not found in dist."
+              exit 1
+            }
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
