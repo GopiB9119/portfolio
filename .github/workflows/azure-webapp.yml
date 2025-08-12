@@ -1,14 +1,13 @@
-name: Deploy to Azure Web App
+name: Deploy to Azure Web App (manual)
 
 on:
-  push:
-    branches: [ "master" ]
+  # Keep this workflow as a manual fallback to avoid duplicate deployments.
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: your-azure-app-service-name   # TODO: set to your App Service name
+  AZURE_WEBAPP_NAME: gopiportfolioapp
   AZURE_WEBAPP_PACKAGE_PATH: '.'
-  NODE_VERSION: '18.x'
+  NODE_VERSION: '22.x'
 
 jobs:
   build-and-deploy:
@@ -38,7 +37,7 @@ jobs:
           zip -r release.zip . -x "**/.git**" "**/node_modules/**" "**/.next/cache/**"
 
       - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
