@@ -86,7 +86,7 @@ export default function ContactForm() {
       <div className="mb-6">
         <h3 className="text-xl font-bold text-[var(--foreground)] mb-2">Get in Touch</h3>
         <p className="text-[var(--muted)]">
-          I'd love to hear from you! Choose the type of inquiry and I'll get back to you within 24 hours.
+          I&#39;d love to hear from you! Choose the type of inquiry and I&#39;ll get back to you within 24 hours.
         </p>
       </div>
 

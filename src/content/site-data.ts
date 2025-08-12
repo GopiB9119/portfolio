@@ -144,6 +144,7 @@ const data: SiteData = {
   avatarUrl: "/profile.jpg",
   links: [
     { label: "GitHub", href: "https://github.com/GopiB9119" },
+    { label: "Phone", href: "tel:+917981710621" },
   ],
   summaryHtml: `
     <p>Motivated and self-driven developer with hands-on experience in full-stack web development,
