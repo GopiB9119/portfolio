@@ -29,11 +29,23 @@ jobs:
           npm run build --if-present
           npm run test --if-present
       
+      - name: Create dist folder for deployment
+        shell: pwsh
+        run: |
+          if (Test-Path dist) { Remove-Item -Recurse -Force dist }
+          New-Item -ItemType Directory -Path dist | Out-Null
+          # Copy runtime assets
+          Copy-Item -Recurse -Force .next dist/.next
+          if (Test-Path 'dist/.next/cache') { Remove-Item -Recurse -Force 'dist/.next/cache' }
+          if (Test-Path public) { Copy-Item -Recurse -Force public dist/public }
+          Copy-Item package.json dist/package.json
+          if (Test-Path package-lock.json) { Copy-Item package-lock.json dist/package-lock.json }
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: ./dist
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,6 +59,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
+          path: ./dist
       
       - name: Login to Azure
         uses: azure/login@v2
