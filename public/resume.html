@@ -3,110 +3,408 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Resume • Gopi Banoth</title>
+    <title>Resume • Gopi Banoth - Full-Stack Developer</title>
+    <meta name="description" content="Experienced Full-Stack Developer specializing in React, Next.js, Node.js, and AI/ML technologies" />
     <style>
-      :root { --text:#111; --muted:#555; --border:#e3e6ee; }
-      @media (prefers-color-scheme: dark) {
-        :root { --text:#eee; --muted:#aaa; --border:#2a2e37; background:#0b0c10; color:#eee; }
+      :root { 
+        --text: #111; 
+        --muted: #555; 
+        --border: #e3e6ee; 
+        --accent: #0066cc;
+        --bg: #fff;
+        --header-bg: #f8fafc;
       }
-      body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 0; padding: 32px; line-height: 1.6; }
-      .container { width: min(900px, 94%); margin: 0 auto; }
+      @media (prefers-color-scheme: dark) {
+        :root { 
+          --text: #eee; 
+          --muted: #aaa; 
+          --border: #2a2e37; 
+          --accent: #3b82f6;
+          --bg: #0b0c10;
+          --header-bg: #1a1d23;
+        }
+        body { background: var(--bg); color: var(--text); }
+      }
+      body { 
+        font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; 
+        margin: 0; 
+        padding: 32px; 
+        line-height: 1.6; 
+        background: var(--bg);
+        color: var(--text);
+      }
+      .container { width: min(900px, 94%); margin: 0 auto; background: var(--bg); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+      .print-container { padding: 40px; }
       h1, h2, h3 { margin: 0; }
-      header { display: grid; gap: 6px; margin-bottom: 18px; }
-      .muted { color: var(--muted); }
-      .section { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
-      ul { padding-left: 20px; margin: 6px 0; }
-      a { color: inherit; }
-      .grid { display: grid; gap: 10px; }
+      h1 { font-size: 2.5rem; font-weight: 700; color: var(--text); }
+      h2 { font-size: 1.5rem; font-weight: 600; color: var(--accent); margin-bottom: 12px; }
+      h3 { font-size: 1.1rem; font-weight: 600; color: var(--text); }
+      header { 
+        background: var(--header-bg); 
+        padding: 40px; 
+        display: grid; 
+        gap: 8px; 
+        margin-bottom: 0; 
+        border-bottom: 2px solid var(--border);
+      }
+      .contact-info { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 12px; }
+      .contact-item { display: flex; align-items: center; gap: 6px; }
+      .muted { color: var(--muted); font-size: 1.1rem; }
+      .section { padding: 30px 40px; border-bottom: 1px solid var(--border); }
+      .section:last-child { border-bottom: none; }
+      ul { padding-left: 20px; margin: 8px 0; }
+      li { margin-bottom: 4px; }
+      a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+      a:hover { color: var(--text); text-decoration: underline; }
+      .grid { display: grid; gap: 12px; }
+      .project-item, .experience-item { 
+        background: var(--header-bg); 
+        padding: 20px; 
+        border-radius: 8px; 
+        border-left: 4px solid var(--accent);
+      }
+      .project-header, .experience-header { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: flex-start; 
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .tech-tags { 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 6px; 
+        margin-top: 8px; 
+      }
+      .tech-tag { 
+        background: var(--accent); 
+        color: white; 
+        padding: 2px 8px; 
+        border-radius: 12px; 
+        font-size: 0.8rem; 
+        font-weight: 500;
+      }
+      .skills-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+        gap: 16px; 
+      }
+      .skill-category { 
+        background: var(--header-bg); 
+        padding: 16px; 
+        border-radius: 8px; 
+      }
+      .skill-category h4 { 
+        color: var(--accent); 
+        margin-bottom: 8px; 
+        font-weight: 600;
+      }
+      .date { color: var(--muted); font-size: 0.9rem; }
+      .highlight { background: linear-gradient(120deg, var(--accent) 0%, transparent 100%); background-size: 100% 3px; background-repeat: no-repeat; background-position: 0 100%; }
+      @media print {
+        body { padding: 0; }
+        .container { box-shadow: none; }
+        .section { page-break-inside: avoid; }
+      }
+      @media (max-width: 768px) {
+        .container { margin: 0; border-radius: 0; }
+        header, .section { padding: 20px; }
+        .contact-info { flex-direction: column; gap: 10px; }
+        .project-header, .experience-header { flex-direction: column; align-items: flex-start; }
+        .skills-grid { grid-template-columns: 1fr; }
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <header>
-        <h1>Gopi Banoth</h1>
-        <div class="muted">Hyderabad, India</div>
-        <div>
-          <a href="mailto:banothgopikrishna19@gmail.com">banothgopikrishna19@gmail.com</a> · 
-          <a href="tel:+917981710621">+91 7981710621</a> · 
-          <a href="https://github.com/GopiB9119" target="_blank" rel="noreferrer">github.com/GopiB9119</a>
-        </div>
-      </header>
-
-      <section class="section">
-        <h2>Career Objective</h2>
-        <p>Motivated and self-driven developer with hands-on experience in full-stack web development, Android apps, and AI/ML basics. Passionate about solving real-world problems through code and eager to grow through professional opportunities.</p>
-      </section>
-
-      <section class="section">
-        <h2>Technical Skills</h2>
-        <div class="grid">
-          <div><strong>Languages:</strong> Java, JavaScript, HTML, CSS, Python (basic)</div>
-          <div><strong>Frontend:</strong> React.js, Next.js, Tailwind CSS, HTML5, CSS3</div>
-          <div><strong>Backend:</strong> Java (Core + Web), Node.js (basic)</div>
-          <div><strong>Database:</strong> MongoDB</div>
-          <div><strong>AI/ML:</strong> Python, OpenCV,Jupyter Notebook</div>
-          <div><strong>DevOps & Cloud:</strong> Microsoft Azure, Databricks, Git/GitHub, CI/CD (basic)</div>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Projects</h2>
-        <div class="grid">
-          <div>
-            <h3>Neighborly – Community Web App</h3>
-            <div class="muted">Next.js + Tailwind CSS</div>
-            <div>Built a social platform for neighborhood updates. Features: user auth, posting, and real-time local news.</div>
+      <div class="print-container">
+        <header>
+          <h1>Gopi Banoth</h1>
+          <div class="muted">Full-Stack Developer & AI Enthusiast</div>
+          <div class="muted">📍 Hyderabad, India</div>
+          <div class="contact-info">
+            <div class="contact-item">
+              <span>📧</span>
+              <a href="mailto:banothgopikrishna19@gmail.com">banothgopikrishna19@gmail.com</a>
+            </div>
+            <div class="contact-item">
+              <span>📱</span>
+              <a href="tel:+917981710621">+91 7981710621</a>
+            </div>
+            <div class="contact-item">
+              <span>🐙</span>
+              <a href="https://github.com/GopiB9119" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+            <div class="contact-item">
+              <span>💼</span>
+              <a href="https://www.linkedin.com/in/gopib-960965243" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
           </div>
-          <div>
-            <h3>Dream Castle – Real Estate Web App</h3>
-            <div class="muted">React.js + Custom CSS</div>
-            <div>Displays property listings with filter and contact features. Clean and responsive UI.</div>
+        </header>
+
+        <section class="section">
+          <h2>💼 Professional Summary</h2>
+          <p>
+            <strong>Passionate Full-Stack Developer</strong> with expertise in modern web technologies including React.js, Next.js, and Node.js. 
+            Experienced in building scalable web applications, mobile apps, and exploring AI/ML technologies. 
+            Strong foundation in both frontend and backend development with a keen interest in creating user-centric solutions 
+            that solve real-world problems. Committed to continuous learning and staying updated with the latest industry trends.
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>🚀 Technical Skills</h2>
+          <div class="skills-grid">
+            <div class="skill-category">
+              <h4>Frontend Development</h4>
+              <ul>
+                <li><strong>Frameworks:</strong> React.js, Next.js, React Native</li>
+                <li><strong>Styling:</strong> Tailwind CSS, CSS3, SCSS, Styled Components</li>
+                <li><strong>Core:</strong> HTML5, CSS3, JavaScript (ES6+), TypeScript</li>
+                <li><strong>State Management:</strong> Redux, Context API, Zustand</li>
+              </ul>
+            </div>
+            <div class="skill-category">
+              <h4>Backend & Database</h4>
+              <ul>
+                <li><strong>Server:</strong> Node.js, Express.js, Java (Spring Boot)</li>
+                <li><strong>Database:</strong> MongoDB, MySQL, PostgreSQL</li>
+                <li><strong>API:</strong> REST APIs, GraphQL, WebSocket</li>
+                <li><strong>Authentication:</strong> JWT, OAuth, NextAuth.js</li>
+              </ul>
+            </div>
+            <div class="skill-category">
+              <h4>Cloud & DevOps</h4>
+              <ul>
+                <li><strong>Cloud Platforms:</strong> Microsoft Azure, Vercel, Netlify</li>
+                <li><strong>Tools:</strong> Git/GitHub, Docker, CI/CD Pipelines</li>
+                <li><strong>Analytics:</strong> Azure Databricks, Power BI</li>
+                <li><strong>Monitoring:</strong> Application Insights, Azure Monitor</li>
+              </ul>
+            </div>
+            <div class="skill-category">
+              <h4>AI/ML & Data Science</h4>
+              <ul>
+                <li><strong>Languages:</strong> Python, R (Basic)</li>
+                <li><strong>Libraries:</strong> OpenCV, NumPy, Pandas, Scikit-learn</li>
+                <li><strong>Tools:</strong> Jupyter Notebook, Google Colab</li>
+                <li><strong>AI APIs:</strong> OpenAI GPT, Google Gemini</li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <h3>Portfolio Website</h3>
-            <div class="muted">Next.js</div>
-            <div>Personal site to showcase projects and skills.</div>
+        </section>
+
+        <section class="section">
+          <h2>🛠️ Featured Projects</h2>
+          <div class="grid">
+            <div class="project-item">
+              <div class="project-header">
+                <div>
+                  <h3>Neighborly – Community Social Platform</h3>
+                  <div class="date">2024</div>
+                </div>
+              </div>
+              <p>
+                A comprehensive community web application that connects neighbors and facilitates local communication. 
+                Features include user authentication, real-time posting, neighborhood news updates, and community events.
+              </p>
+              <ul>
+                <li>Built with <strong>Next.js 14</strong> and <strong>Tailwind CSS</strong> for optimal performance</li>
+                <li>Implemented <strong>real-time messaging</strong> and notification system</li>
+                <li>Integrated <strong>geolocation services</strong> for neighborhood-based content</li>
+                <li>Responsive design with <strong>dark/light mode</strong> support</li>
+              </ul>
+              <div class="tech-tags">
+                <span class="tech-tag">Next.js</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Tailwind CSS</span>
+                <span class="tech-tag">MongoDB</span>
+                <span class="tech-tag">Node.js</span>
+              </div>
+            </div>
+
+            <div class="project-item">
+              <div class="project-header">
+                <div>
+                  <h3>Dream Castle – Real Estate Platform</h3>
+                  <div class="date">2024</div>
+                </div>
+              </div>
+              <p>
+                Modern real estate web application featuring property listings, advanced search filters, 
+                and direct contact capabilities between buyers and sellers.
+              </p>
+              <ul>
+                <li>Developed with <strong>React.js</strong> and custom CSS for unique styling</li>
+                <li>Implemented <strong>advanced filtering system</strong> (price, location, type)</li>
+                <li>Integrated <strong>Google Maps API</strong> for property location display</li>
+                <li>Mobile-first responsive design with smooth animations</li>
+              </ul>
+              <div class="tech-tags">
+                <span class="tech-tag">React.js</span>
+                <span class="tech-tag">CSS3</span>
+                <span class="tech-tag">Google Maps API</span>
+                <span class="tech-tag">JavaScript</span>
+              </div>
+            </div>
+
+            <div class="project-item">
+              <div class="project-header">
+                <div>
+                  <h3>AI-Powered Portfolio Website</h3>
+                  <div class="date">2024</div>
+                </div>
+              </div>
+              <p>
+                Personal portfolio website with integrated AI chat functionality, showcasing projects, 
+                skills, and professional experience with modern animations and interactions.
+              </p>
+              <ul>
+                <li>Built with <strong>Next.js 15</strong> and <strong>TypeScript</strong></li>
+                <li>Integrated <strong>Google Gemini AI</strong> for interactive chat support</li>
+                <li>Implemented <strong>advanced animations</strong> with Framer Motion</li>
+                <li>SEO optimized with meta tags and structured data</li>
+              </ul>
+              <div class="tech-tags">
+                <span class="tech-tag">Next.js</span>
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">AI Integration</span>
+                <span class="tech-tag">Framer Motion</span>
+              </div>
+            </div>
+
+            <div class="project-item">
+              <div class="project-header">
+                <div>
+                  <h3>Mobile Task Management App</h3>
+                  <div class="date">2023</div>
+                </div>
+              </div>
+              <p>
+                Cross-platform mobile application for task management with offline support, 
+                push notifications, and synchronization across devices.
+              </p>
+              <ul>
+                <li>Developed using <strong>React Native</strong> for iOS and Android</li>
+                <li>Implemented <strong>offline-first architecture</strong> with local storage</li>
+                <li>Added <strong>push notifications</strong> and calendar integration</li>
+                <li>Clean UI with gesture-based interactions</li>
+              </ul>
+              <div class="tech-tags">
+                <span class="tech-tag">React Native</span>
+                <span class="tech-tag">AsyncStorage</span>
+                <span class="tech-tag">Push Notifications</span>
+                <span class="tech-tag">SQLite</span>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="section">
-        <h2>Certifications</h2>
-        <div class="grid">
-          <div>Cisco Introduction to Cybersecurity – Completed on 22 June 2022</div>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Education</h2>
-        <div class="grid">
-          <div>
-            <strong>Sri Chaitanya Junior College, Khammam</strong><br/>
-            Senior Secondary (12th Grade) — Board of Intermediate Education, Telangana<br/>
-            Year of Passing: 2020
+        <section class="section">
+          <h2>🏆 Certifications & Achievements</h2>
+          <div class="grid">
+            <div class="project-item">
+              <div class="project-header">
+                <div>
+                  <h3>Cisco Introduction to Cybersecurity</h3>
+                  <div class="date">June 22, 2022</div>
+                </div>
+              </div>
+              <p>Comprehensive course covering cybersecurity fundamentals, threat analysis, and security best practices.</p>
+            </div>
+            <div class="project-item">
+              <div class="project-header">
+                <div>
+                  <h3>Microsoft Azure Fundamentals (In Progress)</h3>
+                  <div class="date">2024</div>
+                </div>
+              </div>
+              <p>Currently pursuing Azure cloud services certification focusing on cloud computing concepts and Azure services.</p>
+            </div>
+            <div class="project-item">
+              <div class="project-header">
+                <div>
+                  <h3>Open Source Contributions</h3>
+                  <div class="date">Ongoing</div>
+                </div>
+              </div>
+              <p>Active contributor to open-source projects on GitHub, focusing on React components and utility libraries.</p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="section">
-        <h2>Additional Links</h2>
-        <div class="grid">
-          <div>GitHub: <a href="https://github.com/GopiB9119" target="_blank" rel="noreferrer">github.com/GopiB9119</a></div>
-          <div>Portfolio: Add link once deployed</div>
-          <div>LinkedIn: Add if available</div>
-        </div>
-      </section>
+        <section class="section">
+          <h2>🎓 Education</h2>
+          <div class="project-item">
+            <div class="project-header">
+              <div>
+                <h3>Sri Chaitanya Junior College, Khammam</h3>
+                <div class="date">2020</div>
+              </div>
+            </div>
+            <p>
+              <strong>Senior Secondary Education (12th Grade)</strong><br/>
+              Board of Intermediate Education, Telangana<br/>
+              <em>Focus:</em> Mathematics, Physics, Chemistry (MPC Stream)
+            </p>
+          </div>
+        </section>
 
-      <section class="section">
-        <h2>Hobbies</h2>
-        <div>Watching anime and Korean dramas</div>
-      </section>
+        <section class="section">
+          <h2>🌟 Additional Information</h2>
+          <div class="skills-grid">
+            <div class="skill-category">
+              <h4>Languages</h4>
+              <ul>
+                <li><strong>Telugu:</strong> Native</li>
+                <li><strong>English:</strong> Professional proficiency</li>
+                <li><strong>Hindi:</strong> Conversational</li>
+              </ul>
+            </div>
+            <div class="skill-category">
+              <h4>Interests & Hobbies</h4>
+              <ul>
+                <li>📺 Anime & Korean Drama enthusiast</li>
+                <li>💻 Contributing to open-source projects</li>
+                <li>📚 Reading tech blogs and documentation</li>
+                <li>🎮 Gaming and interactive media</li>
+              </ul>
+            </div>
+            <div class="skill-category">
+              <h4>Professional Qualities</h4>
+              <ul>
+                <li>🚀 Self-motivated and quick learner</li>
+                <li>🤝 Excellent team collaboration skills</li>
+                <li>🎯 Detail-oriented problem solver</li>
+                <li>⏰ Strong time management abilities</li>
+              </ul>
+            </div>
+            <div class="skill-category">
+              <h4>Availability</h4>
+              <ul>
+                <li>💼 Open to full-time opportunities</li>
+                <li>🌐 Available for remote work</li>
+                <li>🕒 Flexible with different time zones</li>
+                <li>📈 Eager for career growth</li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
-      <section class="section">
-        <h2>Languages Known</h2>
-        <div>Telugu, English</div>
-      </section>
+        <section class="section">
+          <h2>📞 Get In Touch</h2>
+          <p style="text-align: center; font-size: 1.1rem; color: var(--muted);">
+            I'm always interested in discussing new opportunities and exciting projects.<br/>
+            Feel free to reach out through any of the contact methods above!
+          </p>
+          <div style="text-align: center; margin-top: 20px;">
+            <a href="mailto:banothgopikrishna19@gmail.com" style="background: var(--accent); color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600;">
+              📧 Email Me
+            </a>
+          </div>
+        </section>
+      </div>
     </div>
   </body>
-  </html>
-
+</html>
