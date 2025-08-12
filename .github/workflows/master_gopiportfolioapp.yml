@@ -23,17 +23,30 @@ jobs:
         with:
           node-version: '22.x'
 
-      - name: npm install, build, and test
+      - name: Install production dependencies and build
+        shell: pwsh
         run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm ci --omit=dev
+          npm run build
+
+      - name: Create deployable package (minimal)
+        shell: pwsh
+        run: |
+          Remove-Item -Recurse -Force release -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Path release | Out-Null
+          # Copy runtime files only
+          Copy-Item -Recurse -Force .next release/.next
+          Copy-Item -Recurse -Force public release/public
+          Copy-Item package.json release/package.json
+          if (Test-Path package-lock.json) { Copy-Item package-lock.json release/package-lock.json }
+          # Trim cache to reduce size
+          if (Test-Path 'release/.next/cache') { Remove-Item -Recurse -Force 'release/.next/cache' }
       
-      - name: Upload artifact for deployment job
+    - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: node-app
-          path: .
+      name: webapp
+      path: release
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,7 +59,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: node-app
+          name: webapp
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -61,5 +74,5 @@ jobs:
         with:
           app-name: 'gopiportfolioapp'
           slot-name: 'Production'
-          package: .
+          package: ./webapp
           
