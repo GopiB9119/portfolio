@@ -28,14 +28,14 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-      
+
       - name: Create dist folder for deployment (standalone)
         shell: pwsh
         run: |
           if (Test-Path dist) { Remove-Item -Recurse -Force dist }
           New-Item -ItemType Directory -Path dist | Out-Null
-          # Copy standalone server bundle
-          Copy-Item -Recurse -Force ".next/standalone" dist
+          # Copy standalone server bundle contents (so server.js is at dist root)
+          Get-ChildItem ".next/standalone" -Force | Copy-Item -Destination dist -Recurse -Force
           # Ensure .next/static is present for assets
           New-Item -ItemType Directory -Path dist/.next -ErrorAction SilentlyContinue | Out-Null
           if (Test-Path ".next/static") { Copy-Item -Recurse -Force ".next/static" "dist/.next/static" }
