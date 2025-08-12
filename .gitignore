@@ -44,8 +44,6 @@ next-env.d.ts
 .vscode/
 .idea/
 
-# repo
-.github/
 
 # windows/mac cruft
 Thumbs.db
