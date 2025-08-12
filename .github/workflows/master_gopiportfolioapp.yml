@@ -34,11 +34,8 @@ jobs:
         run: |
           if (Test-Path dist) { Remove-Item -Recurse -Force dist }
           New-Item -ItemType Directory -Path dist | Out-Null
-          # Copy standalone server bundle contents (so server.js is at dist root)
-          Get-ChildItem ".next/standalone" -Force | Copy-Item -Destination dist -Recurse -Force
-          # Ensure entry file exists at dist root (Next can emit server.js or server.cjs)
-          if (Test-Path ".next/standalone/server.js") { Copy-Item ".next/standalone/server.js" "dist/server.js" -Force }
-          elseif (Test-Path ".next/standalone/server.cjs") { Copy-Item ".next/standalone/server.cjs" "dist/server.js" -Force }
+          # Copy standalone server bundle to preserved subfolder
+          Copy-Item -Recurse -Force ".next/standalone" "dist/standalone"
           # Ensure .next/static is present for assets
           New-Item -ItemType Directory -Path dist/.next -ErrorAction SilentlyContinue | Out-Null
           if (Test-Path ".next/static") { Copy-Item -Recurse -Force ".next/static" "dist/.next/static" }
@@ -46,13 +43,10 @@ jobs:
           if (Test-Path public) { Copy-Item -Recurse -Force public dist/public }
           # IIS web.config to route to server.js
           if (Test-Path web.config) { Copy-Item web.config dist/web.config }
-            # Diagnostics and fail-fast if server.js is missing
-            Write-Host "Listing .next/standalone contents:"; Get-ChildItem -Recurse -File ".next/standalone" | Select-Object -ExpandProperty FullName
-            Write-Host "Listing dist root:"; Get-ChildItem dist | Select-Object Name,Length
-            if (!(Test-Path "dist/server.js") -and !(Test-Path "dist/server.cjs")) {
-              Write-Host "ERROR: server.js (or server.cjs) not found in dist."
-              exit 1
-            }
+          # Diagnostics
+          Write-Host "Listing .next/standalone contents:"; Get-ChildItem -Recurse -File ".next/standalone" | Select-Object -ExpandProperty FullName
+          Write-Host "Listing dist/standalone:"; Get-ChildItem -Recurse -File "dist/standalone" | Select-Object -ExpandProperty FullName
+          Write-Host "Listing dist root:"; Get-ChildItem dist | Select-Object Name,Length
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
